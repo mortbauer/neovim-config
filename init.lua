@@ -5,7 +5,9 @@ vim.cmd [[packadd packer.nvim]]
 
 vim.o.mouse = 'a'
 
-require('monokai').setup { palette = require('monokai').pro }
+--require('monokai').setup { }
+--require('monokai').setup { palette = require('monokai').pro }
+require('monokai').setup { palette = require('monokai').soda }
 
 vim.wo.relativenumber = true
 
@@ -32,8 +34,6 @@ vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 require('plugins')
 
 require('lsp_config')
-
-require('nightfox').load('nightfox')
 
 require('nvim-tree').setup()
 

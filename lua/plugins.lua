@@ -17,7 +17,7 @@ return require('packer').startup(function()
   use { 'hrsh7th/nvim-cmp' }
 
   --color scheme
-  use { 'EdenEast/nightfox.nvim' }
+  --use { 'EdenEast/nightfox.nvim' }
 
   --file explorer
   use { 'kyazdani42/nvim-tree.lua' }
