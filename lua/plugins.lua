@@ -30,4 +30,12 @@ return require('packer').startup(function()
 
   --molokai colorscheme
   use { 'tanvirtin/monokai.nvim' }
+
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+  }
+  -- use { 'tpope/vim-commentary' }
 end)

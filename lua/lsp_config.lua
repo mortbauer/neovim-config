@@ -1,5 +1,7 @@
-local nvim_lsp = require('lspconfig')
+local lspconfig = require('lspconfig')
 local cmp = require('cmp')
+local util = require('lspconfig/util')
+local path = util.path
 
 
 -- Use an on_attach function to only map the following keys
@@ -35,14 +37,47 @@ local on_attach = function(client, bufnr)
 
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { 'pyright' }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
+-- attach venv paths locally
+local function get_python_path(workspace)
+  -- Use activated virtualenv.
+  if vim.env.VIRTUAL_ENV then
+    return path.join(vim.env.VIRTUAL_ENV, 'bin', 'python')
+  end
+
+  -- Find and use virtualenv in workspace directory.
+  for _, pattern in ipairs({'*', '.*'}) do
+    local match = vim.fn.glob(path.join(workspace, pattern, 'pyvenv.cfg'))
+    if match ~= '' then
+      return path.join(path.dirname(match), 'bin', 'python')
+    end
+  end
+  
+  -- Find and use virtualenv from pipenv in workspace directory.
+  local match = vim.fn.glob(path.join(workspace, 'Pipfile'))
+  if match ~= '' then
+    local venv = vim.fn.trim(vim.fn.system('PIPENV_PIPFILE=' .. match .. ' pipenv --venv'))
+    return path.join(venv, 'bin', 'python')
+  end
+
+  -- Find and use virtualenv via poetry in workspace directory.
+  local match = vim.fn.glob(path.join(workspace, 'poetry.lock'))
+  if match ~= '' then
+    local venv = vim.fn.trim(vim.fn.system('poetry env info -p'))
+    return path.join(venv, 'bin', 'python')
+  end
+
+  -- Fallback to system Python.
+  return exepath('python3') or exepath('python') or 'python'
 end
+
+
+lspconfig.pyright.setup({
+  before_init = function(_, config)
+    config.settings.python.pythonPath = get_python_path(config.root_dir)
+  end,
+  -- for keybindings
+  on_attach = on_attach,
+  flags = {
+    debounce_text_changes = 150,
+  }
+})
