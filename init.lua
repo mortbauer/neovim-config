@@ -45,6 +45,8 @@ vim.api.nvim_set_keymap("n", "<leader>R", ":%s/<C-r><C-w>/", { noremap = true } 
 
 vim.api.nvim_set_keymap("n", "<F7>", ":Vista<cr>", { noremap = true } )
 
+vim.api.nvim_set_keymap("n", "<leader><space>", ":nohlsearch<cr>", { noremap = true } )
+
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 
