@@ -27,6 +27,10 @@ require('monokai').setup { palette = require('monokai').soda }
 vim.bo.undofile = true
 
 vim.wo.relativenumber = true
+-- vim.wo.nu = rnu
+vim.cmd([[
+ set nu rnu
+]])
 
 vim.g.autochdir = true
 

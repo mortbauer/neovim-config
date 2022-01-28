@@ -38,4 +38,5 @@ return require('packer').startup(function()
     end
   }
   -- use { 'tpope/vim-commentary' }
+  use { 'tpope/vim-fugitive' }
 end)
