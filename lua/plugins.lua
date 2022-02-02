@@ -4,6 +4,9 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
+  -- Add packer itself
+  use {'wbthomason/packer.nvim'}
+
   -- Plugins can have post-install/update hooks
   use {'iamcco/markdown-preview.nvim', run = 'cd app && yarn install', cmd = 'MarkdownPreview'}
 
@@ -30,6 +33,8 @@ return require('packer').startup(function()
 
   --molokai colorscheme
   use { 'tanvirtin/monokai.nvim' }
+  use { 'tomasr/molokai'}
+  use { 'noah/vim256-color'}
 
   use {
     'numToStr/Comment.nvim',

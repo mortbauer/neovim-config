@@ -19,9 +19,14 @@ vim.o.hlsearch = true
 
 
 --require('monokai').setup { }
---require('monokai').setup { palette = require('monokai').pro }
-require('monokai').setup { palette = require('monokai').soda }
+-- require('molokai').setup { palette = require('monokai').pro }
+-- require('monokai').setup { palette = require('monokai').soda }
+vim.cmd([[
+syntax on
+colorscheme fu
+]])
 
+-- colorscheme elflord
 -- Persistent undos
 --vim.bo.undodir = vim.env.XDG_CACHE_HOME .. '/vim/tmp//'
 vim.bo.undofile = true
