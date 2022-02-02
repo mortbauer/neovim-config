@@ -24,6 +24,7 @@ vim.o.hlsearch = true
 vim.cmd([[
 syntax on
 colorscheme fu
+hi StatusLineNC   ctermfg=15  guifg=#ffffff ctermbg=4 guibg=#4e4e4e cterm=bold gui=bold
 ]])
 
 -- colorscheme elflord
