@@ -23,7 +23,7 @@ vim.o.hlsearch = true
 -- require('monokai').setup { palette = require('monokai').soda }
 vim.cmd([[
 syntax on
-colorscheme fu
+colorscheme molokai
 hi StatusLineNC   ctermfg=15  guifg=#ffffff ctermbg=4 guibg=#4e4e4e cterm=bold gui=bold
 ]])
 
